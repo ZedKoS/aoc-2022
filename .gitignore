@@ -1,0 +1,16 @@
+# executables
+*.exe
+*.o
+
+# input files
+*.txt
+
+# rust
+target
+Cargo.lock
+
+# haskell
+*.hi
+
+# other
+.vscode

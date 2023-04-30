@@ -12,5 +12,8 @@ Cargo.lock
 # haskell
 *.hi
 
+# ocaml
+_build
+
 # other
 .vscode

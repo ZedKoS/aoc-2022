@@ -12,13 +12,14 @@
 
 using namespace std;
 
+// we do a little trolling :)
 #define int int64_t
-
 
 struct Point { int x, y; };
 struct Line { Point start, end; };
 struct Range { int start, end; };
 struct Sensor { Point sensor, beacon; };
+
 
 size_t size(Range r) {
     return abs(r.end - r.start);
@@ -26,12 +27,16 @@ size_t size(Range r) {
 
 struct PointHash {
     size_t operator()(const Point& a) const {
-        return abs(a.x) * 429131 + abs(a.y);
+        constexpr int idk = 429131;
+        return abs(a.x) * idk + abs(a.y);
     }
 };
 
 inline bool operator==(Point const& a, Point const& b) {
     return (a.x == b.x) && (a.y == b.y);
+}
+inline bool operator!=(Point const& a, Point const& b) {
+    return !operator==(a, b);
 }
 
 
@@ -158,7 +163,7 @@ int solve2(vector<Sensor> const& in) {
     Point points[JOBS];
 
     for (size_t i = 0; i < JOBS; i++) {
-        auto start = i * ROWS / JOBS;
+        auto start = i * (ROWS / JOBS);
         auto end = start + ROWS / JOBS;
         jobs[i] = thread(scan_rows, in, start, end, ref(points[i]));
     }
